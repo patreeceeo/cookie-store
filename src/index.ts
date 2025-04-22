@@ -379,7 +379,11 @@ class CookieStoreManager {
   }
 }
 
-if (!('cookies' in ServiceWorkerRegistration.prototype)) {
+if (
+  typeof ServiceWorkerRegistration !== 'undefined' &&
+  'prototype' in ServiceWorkerRegistration &&
+  !('cookies' in ServiceWorkerRegistration.prototype)
+) {
   Object.defineProperty(ServiceWorkerRegistration.prototype, 'cookies', {
     configurable: true,
     enumerable: true,
